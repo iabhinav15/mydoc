@@ -5,7 +5,13 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { TableKit } from "@tiptap/extension-table";
 import Image from "@tiptap/extension-image";
-import { FontFamily, TextStyle } from "@tiptap/extension-text-style";
+import {
+  Color,
+  FontFamily,
+  FontSize,
+  TextStyle,
+  TextStyleKit,
+} from "@tiptap/extension-text-style";
 
 import { useEditorStore } from "@/store/use-editor-store";
 
@@ -64,6 +70,11 @@ export const Editor = () => {
       }),
       FontFamily,
       TextStyle,
+      FontSize,
+      Color.configure({
+        types: ["textStyle"],
+      }),
+      TextStyleKit,
     ],
     content: `
         <table>
