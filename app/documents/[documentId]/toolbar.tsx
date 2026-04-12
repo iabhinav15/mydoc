@@ -1,10 +1,16 @@
 "use client";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { useEditorStore } from "@/store/use-editor-store";
 import {
   BoldIcon,
+  ChevronDownIcon,
   ItalicIcon,
   ListTodoIcon,
   LucideIcon,
@@ -16,6 +22,52 @@ import {
   UnderlineIcon,
   Undo2Icon,
 } from "lucide-react";
+
+const FontFamilyButton = () => {
+  const { editor } = useEditorStore();
+  const fonts = [
+    { label: "Arial", value: "Arial" },
+    { label: "Times New Roman", value: "Times New Roman" },
+    { label: "Courier New", value: "Courier New" },
+    { label: "Georgia", value: "Georgia" },
+    { label: "Verdana", value: "Verdana" },
+  ];
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={cn(
+            "text-sm h-7 w-30 shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden",
+          )}
+        >
+          <span className="truncate">
+            {editor?.getAttributes("textStyle").fontFamily || "Arial"}
+          </span>
+          <ChevronDownIcon className="ml-2 size-4 shrink-0" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-3 rounded-sm flex flex-col bg-foreground text-background gap-y-1">
+        {fonts.map(({ label, value }) => (
+          <button
+            key={value}
+            className={cn(
+              "flex items-center rounded-sm gap-x-2 py-1 hover:bg-neutral-200/80 px-2",
+              editor?.getAttributes("textStyle").fontFamily === value &&
+                "bg-neutral-200/80",
+            )}
+            style={{
+              fontFamily: value,
+            }}
+            onClick={() => editor?.chain().focus().setFontFamily(value).run()}
+          >
+            <span className="text-sm">{label}</span>
+          </button>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -133,6 +185,8 @@ export const Toolbar = () => {
       {sections[2].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}
+      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      <FontFamilyButton />
     </div>
   );
 };

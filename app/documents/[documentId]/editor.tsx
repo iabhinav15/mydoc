@@ -5,6 +5,7 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { TableKit } from "@tiptap/extension-table";
 import Image from "@tiptap/extension-image";
+import { FontFamily, TextStyle } from "@tiptap/extension-text-style";
 
 import { useEditorStore } from "@/store/use-editor-store";
 
@@ -61,6 +62,8 @@ export const Editor = () => {
           alwaysPreserveAspectRatio: true,
         },
       }),
+      FontFamily,
+      TextStyle,
     ],
     content: `
         <table>
