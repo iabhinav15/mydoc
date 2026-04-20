@@ -4,6 +4,7 @@ import { TaskItem, TaskList } from "@tiptap/extension-list";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { TableKit } from "@tiptap/extension-table";
+import Highlight from "@tiptap/extension-highlight";
 import Image from "@tiptap/extension-image";
 import {
   Color,
@@ -75,6 +76,9 @@ export const Editor = () => {
         types: ["textStyle"],
       }),
       TextStyleKit,
+      Highlight.configure({
+        multicolor: true,
+      }),
     ],
     content: `
         <table>
