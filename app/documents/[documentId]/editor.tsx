@@ -6,6 +6,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { TableKit } from "@tiptap/extension-table";
 import Highlight from "@tiptap/extension-highlight";
 import Image from "@tiptap/extension-image";
+import TextAlign from "@tiptap/extension-text-align";
 import {
   Color,
   FontFamily,
@@ -131,6 +132,9 @@ export const Editor = () => {
             return false;
           }
         },
+      }),
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
       }),
     ],
     content: `
