@@ -24,6 +24,7 @@ import {
   ImageIcon,
   ItalicIcon,
   Link2Icon,
+  ListCollapseIcon,
   ListIcon,
   ListOrderedIcon,
   ListTodoIcon,
@@ -48,6 +49,70 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
+const LineHeihtButton = () => {
+  const { editor } = useEditorStore();
+
+  const lineHeights = [
+    {
+      label: "Default",
+      value: "normal",
+    },
+    {
+      label: "Single",
+      value: "1",
+    },
+    {
+      label: "1.15",
+      value: "1.15",
+    },
+    {
+      label: "1.5",
+      value: "1.5",
+    },
+    {
+      label: "Double",
+      value: "2",
+    },
+  ];
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={cn(
+            "text-sm h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden",
+          )}
+        >
+          <ListCollapseIcon className="size-4" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1 w-full">
+        {lineHeights.map(({ label, value }) => (
+          <button
+            key={value}
+            onClick={() =>
+              editor
+                ?.chain()
+                .focus()
+                .toggleTextStyle({
+                  lineHeight: `${value}`,
+                })
+                .run()
+            }
+            className={cn(
+              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+              editor?.isActive("textStyle", { lineHeight: `${value}` }) &&
+                "bg-neutral-200/80",
+            )}
+          >
+            <span className="text-sm">{label}</span>
+          </button>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const FontSizeButton = () => {
   const { editor } = useEditorStore();
@@ -617,6 +682,8 @@ export const Toolbar = () => {
       <ListButton />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       <FontSizeButton />
+      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      <LineHeihtButton />
     </div>
   );
 };
