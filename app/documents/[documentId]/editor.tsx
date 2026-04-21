@@ -10,8 +10,8 @@ import TextAlign from "@tiptap/extension-text-align";
 import {
   Color,
   FontFamily,
-  FontSize,
   TextStyle,
+  FontSize,
   TextStyleKit,
 } from "@tiptap/extension-text-style";
 import Link from "@tiptap/extension-link";

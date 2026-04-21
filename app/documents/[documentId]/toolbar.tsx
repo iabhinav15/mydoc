@@ -49,6 +49,45 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+const FontSizeButton = () => {
+  const { editor } = useEditorStore();
+  const [fontSize, setFontSize] = useState(11);
+
+  const lists = [11, 12, 13, 14, 16, 18, 20, 24, 30, 32];
+
+  const handleChangeFontSize = (item: number) => {
+    editor?.chain().focus().setFontSize(`${item}px`).run();
+    setFontSize(item);
+  };
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={cn(
+            "text-sm h-7 w-8 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden border-2",
+          )}
+        >
+          {fontSize}
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-1 rounded-sm flex flex-col gap-y-1 w-fit">
+        {lists.map((item) => (
+          <button
+            key={item}
+            onClick={() => handleChangeFontSize(item)}
+            className={cn(
+              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+            )}
+          >
+            <span className="text-sm">{item}</span>
+          </button>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
 const ListButton = () => {
   const { editor } = useEditorStore();
 
@@ -576,6 +615,8 @@ export const Toolbar = () => {
       <AlignButton />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       <ListButton />
+      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      <FontSizeButton />
     </div>
   );
 };
