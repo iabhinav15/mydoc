@@ -652,7 +652,7 @@ export const Toolbar = () => {
   ];
 
   return (
-    <div className="bg-muted px-2.5 py-0.5 rounded-3xl min-h-10 flex items-center gap-x-0.5 overflow-x-auto">
+    <div className="bg-muted px-2.5 py-0.5 justify-center rounded-3xl min-h-10 flex items-center gap-x-0.5 overflow-x-auto">
       {sections[0].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}
