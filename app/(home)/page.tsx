@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Navbar } from "./navbar";
+import { TemplatesGallery } from "./templates-gallery";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
         <Navbar />
       </div>
       <div className="mt-16">
+        <TemplatesGallery />
       </div>
     </div>
   );
